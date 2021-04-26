@@ -381,11 +381,8 @@ class _VRPlayerState extends State<VRPlayer> {
   @override
   Widget build(BuildContext context) {
     return InAppWebView(
-      initialUrl: _buildInitalUrl(),
-      initialHeaders: {},
       initialOptions: InAppWebViewGroupOptions(
         crossPlatform: InAppWebViewOptions(
-          debuggingEnabled: widget.controller.debug,
           mediaPlaybackRequiresUserGesture: false,
           transparentBackground: true,
           disableContextMenu: true,
@@ -406,8 +403,6 @@ class _VRPlayerState extends State<VRPlayer> {
       ),
       gestureRecognizers: widget.gestureRecognizers,
       onWebViewCreated: _onWebViewCreated,
-      onLoadStart: _onLoadStart,
-      onLoadStop: _onLoadStop,
       onProgressChanged: _onProgressChange,
       onConsoleMessage: _onConsoleMessage,
     );
