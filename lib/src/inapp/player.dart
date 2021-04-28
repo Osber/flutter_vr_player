@@ -352,6 +352,7 @@ class VRPlayerController extends VRPlayerObserver {
 
 class VRPlayer extends StatefulWidget {
   final VRPlayerController controller;
+
   final Function(int) onPlayerLoading;
   final Function() onPlayerInit;
   final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers;
@@ -405,10 +406,13 @@ class _VRPlayerState extends State<VRPlayer> {
       onWebViewCreated: _onWebViewCreated,
       onProgressChanged: _onProgressChange,
       onConsoleMessage: _onConsoleMessage,
+      onLoadStop: _onLoadStop,
+      onLoadStart: _onLoadStart,
+      initialUrlRequest: URLRequest(url: Uri.parse(_buildInitalUrl())),
     );
   }
 
-  void _onLoadStart(InAppWebViewController controller, String url) {
+  void _onLoadStart(InAppWebViewController controller, Uri url) {
     if (widget.onPlayerInit != null) {
       widget.onPlayerInit();
     }
@@ -446,7 +450,7 @@ class _VRPlayerState extends State<VRPlayer> {
     }
   }
 
-  void _onLoadStop(InAppWebViewController controller, String url) async {
+  void _onLoadStop(InAppWebViewController controller, Uri url) async {
     webView.addJavaScriptHandler(
       handlerName: _eventHandler,
       callback: (result) {
