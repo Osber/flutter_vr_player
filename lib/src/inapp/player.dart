@@ -203,7 +203,7 @@ class VRPlayerController extends VRPlayerObserver {
         "buildPlayer(url='$_url', vr_btn = $_vrButton, auto_play = $_autoPlay," +
             " loop = $_loop, debug = $_debug, muted = $_muted, debug_console = $_console, ios_perm = $_askIosMotionPermission);";
     final _ = await _frameController.evaluateJavascript(source: jscr);
-    await Future.delayed(const Duration(milliseconds: 500), () => onBuild());
+    onBuild();
     return _;
   }
 
